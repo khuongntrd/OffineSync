@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyApp.CustomerPage">
+    <StackLayout>
+        <Entry Placeholder="Firstname"
+               Text="{Binding Firstname}" />
+        <Entry Placeholder="Lastname"
+               Text="{Binding Lastname}" />
+        <Entry Placeholder="Address"
+               Text="{Binding Address}" />
+        <Button Text="Save" x:Name="btnSave" Clicked="btnSave_Clicked"/>
+        <Button Text="Save + Sync" x:Name="btnSaveSync" Clicked="btnSaveSync_Clicked"/>
+    </StackLayout>
+</ContentPage>
+
+    

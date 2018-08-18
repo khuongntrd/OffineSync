@@ -14,10 +14,8 @@ namespace MyApp.Data
 
         SQLiteAsyncConnection Connection { get; set; }
 
-       
-
-      
-
+        public static DatabaseRepository Instance { get; } = new DatabaseRepository();
+              
         public DatabaseRepository()
         {
             Connection = new SQLiteAsyncConnection(

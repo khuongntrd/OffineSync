@@ -13,6 +13,8 @@ namespace MyApp.Services
     {
         DatabaseRepository DatabaseRepository { get; }
 
+        public static SyncService Instance { get; } = new SyncService(DatabaseRepository.Instance);
+
         public DateTime LastSync
         {
             get

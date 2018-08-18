@@ -3,12 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyApp"
              x:Class="MyApp.MainPage">
-
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
-
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Add" x:Name="btnAdd" Clicked="btnAdd_Clicked"/>
+            <Button Text="Sync"  x:Name="btnSync" Clicked="btnSync_Clicked"/>
+            <Button Text="Refresh"
+                    x:Name="btnRefresh"
+                    Clicked="btnRefresh_Clicke"/>
+        </StackLayout>
+        <ListView x:Name="MyListView" Grid.Row="1" ItemTapped="MyListView_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding}" Detail="{Binding LastUpdated, StringFormat='{0:d}'}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>
