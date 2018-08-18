@@ -27,11 +27,11 @@ namespace MyApi.Models
         }
 
         internal void InsertCustomer(Customer customer)
-        {            
+        {
+            customer.ClientLastUpdated = customer.LastUpdated;
+
             if (customer.LastUpdated == DateTime.MinValue)
                 customer.LastUpdated = DateTime.UtcNow;
-            else
-                customer.ClientLastUpdated = customer.LastUpdated;
 
             Add(customer);
 
@@ -68,6 +68,7 @@ namespace MyApi.Models
                     serverModel.Latitude = clientModel.Latitude;
                     serverModel.Longitude = clientModel.Longitude;
                     serverModel.Picture = clientModel.Picture;
+                    serverModel.Address = clientModel.Address;
                     serverModel.LastUpdated = DateTime.UtcNow;
                     serverModel.ClientLastUpdated = clientModel.LastUpdated;
                 }

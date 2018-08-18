@@ -18,7 +18,7 @@
         <ListView x:Name="MyListView" Grid.Row="1" ItemTapped="MyListView_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding}" Detail="{Binding LastUpdated, StringFormat='{0:d}'}"/>
+                    <TextCell Text="{Binding Firstname}" Detail="{Binding LastUpdated, StringFormat='{0:d}'}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -48,12 +48,12 @@ namespace MyApi
                 app.UseHsts();
             }
 
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), @"Uploads")),
-                RequestPath = new PathString("/Uploads")
-            });
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), @"Uploads")),
+            //    RequestPath = new PathString("/Uploads")
+            //});
 
             app.UseHttpsRedirection();
             app.UseMvc();

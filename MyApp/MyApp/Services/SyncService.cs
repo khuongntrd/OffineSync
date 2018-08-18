@@ -1,8 +1,10 @@
 ﻿using MyApp.Data;
 using Newtonsoft.Json;
+using Plugin.Settings;
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +21,11 @@ namespace MyApp.Services
         {
             get
             {
-                if (App.Current.Properties.ContainsKey("LastSync"))
-                    return (DateTime)App.Current.Properties["LastSync"];
-
-                return DateTime.MinValue;
+              return  DateTime.Parse(CrossSettings.Current.GetValueOrDefault("LastSync", "1/1/1"), CultureInfo.InvariantCulture);
             }
             set
             {
-                App.Current.Properties["LastSync"] = value;
+                CrossSettings.Current.AddOrUpdateValue("LastSync", value.ToString(CultureInfo.InvariantCulture));
             }
         }
 
@@ -55,7 +54,7 @@ namespace MyApp.Services
 
         public async Task<List<Customer>> PutToServerAsync(List<Customer> customers)
         {
-            string url = "http://localhost:50643/api/customers/sync?since=" + System.Net.WebUtility.UrlEncode(LastSync.ToString("z"));
+            string url = "http://192.168.137.1:50643/api/customers/sync?since=" + System.Net.WebUtility.UrlEncode(LastSync.ToString(CultureInfo.InvariantCulture));
 
             using (var httpClient = new HttpClient())
             {
@@ -69,7 +68,7 @@ namespace MyApp.Services
                 if(!response.IsSuccessStatusCode)
                 {
                     //TODO: handle unsuccess request;
-                    throw new NotImplementedException();
+                    //throw new NotImplementedException();
                 }
 
                 return JsonConvert.DeserializeObject<List<Customer>>(await response.Content.ReadAsStringAsync());

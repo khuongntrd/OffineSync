@@ -67,40 +67,40 @@ namespace MyApi.Controllers
             return Ok(customer);
         }
 
-        // PUT: api/Customers/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer([FromRoute] string id, [FromBody] Customer customer)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Customers/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutCustomer([FromRoute] string id, [FromBody] Customer customer)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != customer.Id)
-            {
-                return BadRequest();
-            }
+        //    if (id != customer.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(customer).State = EntityState.Modified;
+        //    _context.Entry(customer).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CustomerExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Customers
         [HttpPost]
@@ -143,7 +143,7 @@ namespace MyApi.Controllers
             return _context.Customers.Any(e => e.Id == id);
         }
 
-        [HttpPut("/sync")]
+        [HttpPut("sync")]
         public async Task<IActionResult> Sync([FromBody] List<Customer> changed, [FromQuery] DateTime? since = null)
         {
             using (var trans = _context.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))

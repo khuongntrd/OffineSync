@@ -1,4 +1,5 @@
-﻿using Shared;
+﻿using MyApp.Data;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace MyApp
 {
     public partial class MainPage : ContentPage
     {
-     public static  ObservableCollection<Customer> Customers { get; set; }
+        public static ObservableCollection<Customer> Customers { get; set; }
 
         public MainPage()
         {
@@ -20,11 +21,13 @@ namespace MyApp
             Customers = new ObservableCollection<Customer>();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             if (Customers.Count == 0)
             {
-                RefreshAsync();
+                await DatabaseRepository.Instance.InitAsync();
+
+                await RefreshAsync();
             }
             base.OnAppearing();
         }
@@ -33,7 +36,7 @@ namespace MyApp
         {
             btnAdd.IsEnabled = btnSync.IsEnabled = btnRefresh.IsEnabled = false;
 
-            Customers = new ObservableCollection<Customer>(await Data.DatabaseRepository.Instance.FindAsync(x => true));
+            Customers = new ObservableCollection<Customer>(await Data.DatabaseRepository.Instance.FindAsync(x => x.Deleted==null));
 
             MyListView.ItemsSource = Customers;
 

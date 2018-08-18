@@ -15,7 +15,7 @@ using Android.Widget;
 namespace MyApp.Droid
 {
     [BroadcastReceiver]
-    [IntentFilter(new[] { Android.Net.ConnectivityManager.ConnectivityAction, Android.Net.Wifi.WifiManager.NetworkStateChangedAction)]
+    [IntentFilter(new[] { Android.Net.ConnectivityManager.ConnectivityAction, Android.Net.Wifi.WifiManager.NetworkStateChangedAction })]
     public class NetworkBroadcastReceiver : BroadcastReceiver
     {
         public override void OnReceive(Context context, Intent intent)

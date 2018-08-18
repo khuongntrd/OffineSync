@@ -19,9 +19,7 @@ namespace MyApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-#if DEBUG
-                .UseUrls("http://*:50643/")
-#endif
+                .UseUrls("http://*:50643/")            
                 .UseStartup<Startup>();
     }
 }

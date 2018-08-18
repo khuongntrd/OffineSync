@@ -1,9 +1,6 @@
-﻿using Shared;
+﻿using MyApp.Data;
+using Shared;
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,14 +20,19 @@ namespace MyApp
             BindingContext = Customer;
         }
 
-        public CustomerPage():this(new Shared.Customer())
+        public CustomerPage() : this(new Shared.Customer())
         {
 
         }
 
-        private void btnSave_Clicked(object sender, EventArgs e)
+        private  async void btnSave_Clicked(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(Customer.Id) || Customer.LastUpdated > DateTime.MinValue)
+            {
+                await DatabaseRepository.Instance.UpdateAsync(Customer);
 
+            }
+            await DatabaseRepository.Instance.InsertAsync(Customer);
         }
 
         private void btnSaveSync_Clicked(object sender, EventArgs e)
