@@ -25,14 +25,14 @@ namespace MyApp
 
         }
 
-        private  async void btnSave_Clicked(object sender, EventArgs e)
+        private async void btnSave_Clicked(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(Customer.Id) || Customer.LastUpdated > DateTime.MinValue)
             {
                 await DatabaseRepository.Instance.UpdateAsync(Customer);
-
             }
-            await DatabaseRepository.Instance.InsertAsync(Customer);
+            else
+                await DatabaseRepository.Instance.InsertAsync(Customer);
         }
 
         private void btnSaveSync_Clicked(object sender, EventArgs e)
